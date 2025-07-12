@@ -1,0 +1,60 @@
+body {
+    background: #181A20;
+    color: #fff;
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #23262F;
+    border-radius: 15px;
+    padding: 32px 24px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+h1 {
+    font-size: 2em;
+    color: #F0B90B;
+    margin-bottom: 28px;
+}
+.binance {
+    color: #fff;
+    background: #F0B90B;
+    padding: 2px 12px;
+    border-radius: 8px;
+    font-size: 0.7em;
+}
+form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background: #181A20;
+    color: #fff;
+    font-size: 1em;
+}
+button {
+    background: #F0B90B;
+    color: #181A20;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+button:hover {
+    background: #FFD700;
+}
+canvas {
+    background: #181A20;
+    border-radius: 10px;
+    margin-top: 18px;
+    box-shadow: 0 2px 10px rgba(240,185,11,0.12);
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Análise da Bolsa - Estilo Binance</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Análise de Ações em tempo real <span class="binance">Willdograu>
+        <form id="stockForm">
+            <input type="text" id="symbol" placeholder="Ex: PETR4.SA, VALE3.SA, AAPL" value="PETR4.SA">
+            <button type="submit">Buscar</button>
+        </form>
+        <canvas id="stockChart"></canvas>
+    </div>
+    <script>
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        let chart;
+
+        async function fetchData(symbol) {
+            const resp = await fetch(`/api/stock?symbol=${symbol}`);
+            const result = await resp.json();
+            if(result.error){
+                alert(result.error);
+                return;
+            }
+            const labels = result.data.map(d => d.time);
+            const prices = result.data.map(d => d.price);
+
+            if(chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: symbol,
+                        data: prices,
+                        borderColor: '#F0B90B',
+                        backgroundColor: 'rgba(240,185,11,0.1)',
+                        fill: true,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { labels: { color: '#F0B90B' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#fff' } },
+                        y: { ticks: { color: '#fff' } }
+                    }
+                }
+            });
+        }
+
+        document.getElementById('stockForm').onsubmit = (e) => {
+            e.preventDefault();
+            const symbol = document.getElementById('symbol').value;
+            fetchData(symbol);
+        };
+
+        // Primeira carga
+        fetchData('PETR4.SA');
+    </script>
+</body>
+</html>
